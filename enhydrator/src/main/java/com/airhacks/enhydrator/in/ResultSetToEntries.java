@@ -43,25 +43,34 @@ public class ResultSetToEntries implements Function<ResultSet, Row> {
                 //from java.sql.Types
                 int columnType = metaData.getColumnType(i);
                 String columnName = metaData.getColumnName(i);
+
+                Object value = null;
                 switch (columnType) {
                     case Types.VARCHAR:
                     case Types.CHAR:
-                        row.addColumn(columnIndex, columnName, resultSet.getString(i));
+                        value = resultSet.getString(i);
                         break;
                     case Types.INTEGER:
-                        row.addColumn(columnIndex, columnName, resultSet.getInt(i));
+                        value = resultSet.getInt(i);
                         break;
                     case Types.DOUBLE:
-                        row.addColumn(columnIndex, columnName, resultSet.getDouble(i));
+                        value = resultSet.getDouble(i);
                         break;
                     case Types.BOOLEAN:
-                        row.addColumn(columnIndex, columnName, resultSet.getBoolean(i));
+                        value = resultSet.getBoolean(i);
                         break;
                     case Types.FLOAT:
-                        row.addColumn(columnIndex, columnName, resultSet.getFloat(i));
+                        value = resultSet.getFloat(i);
                         break;
                     default:
-                        row.addColumn(columnIndex, columnName, resultSet.getObject(i));
+                        value = resultSet.getObject(i);
+                }
+
+                if(value == null){
+                    row.addNullColumn(columnIndex, columnName);
+                }
+                else{
+                    row.addColumn(columnIndex, columnName, value);
                 }
             }
         } catch (SQLException ex) {
