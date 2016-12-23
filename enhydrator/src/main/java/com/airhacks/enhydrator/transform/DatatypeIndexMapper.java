@@ -66,6 +66,12 @@ public class DatatypeIndexMapper extends RowTransformation {
             case BOOLEAN:
                 column.convertToBoolean();
                 break;
+            case LONG:
+                column.convertToLong();
+                break;
+            case SHORT:
+                column.convertToShort();
+                break;
         }
     }
 

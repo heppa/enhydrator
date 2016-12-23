@@ -1,5 +1,6 @@
 package com.airhacks.enhydrator.in;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.StringTokenizer;
@@ -108,6 +109,32 @@ public class Column implements Cloneable {
 
             String asString = String.valueOf(value.get());
             this.value = Optional.of(Boolean.parseBoolean(asString));
+        }
+    }
+
+    public void convertToLong() {
+        if (value.isPresent()) {
+
+            String asString = String.valueOf(value.get());
+            this.value = Optional.of(Long.parseLong(asString));
+        }
+    }
+
+    public void convertToShort() {
+        if (value.isPresent()) {
+
+            String asString = String.valueOf(value.get());
+            this.value = Optional.of(Short.parseShort(asString));
+        }
+    }
+
+    public void convertToBigDecimal(){
+        if (value.isPresent()) {
+
+            String asString = String.valueOf(value.get());
+            if(value != null) {
+                this.value = Optional.of(new BigDecimal(asString));
+            }
         }
     }
 

@@ -66,6 +66,16 @@ public class DatatypeNameMapper extends RowTransformation {
             case BOOLEAN:
                 column.convertToBoolean();
                 break;
+            case LONG:
+                column.convertToLong();
+                break;
+            case SHORT:
+                column.convertToShort();
+                break;
+            case BIG_DECIMAL:
+                column.convertToBigDecimal();
+                break;
+
         }
     }
 
